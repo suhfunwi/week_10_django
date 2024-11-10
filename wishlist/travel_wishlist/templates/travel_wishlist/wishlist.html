@@ -1,0 +1,11 @@
+<h2>Travel Wishlist</h2>
+{% for place in places %}
+<!--django template tag-->
+<div>
+    {{ place.name }}
+</div>
+
+{% empty %}
+<p>You have no places in your wishlist.</p>
+
+{% endfor %}
