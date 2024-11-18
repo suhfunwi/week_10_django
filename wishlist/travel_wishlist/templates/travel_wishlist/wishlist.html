@@ -1,11 +1,14 @@
 <h2>Travel Wishlist</h2>
 {% for place in places %}
+<!--prints out the places in the wishlist on separate lines-->
 <!--django template tag-->
 <div>
     {{ place.name }}
+<!--  names of the places  -->
 </div>
 
 {% empty %}
+<!--if empty then display below message-->
 <p>You have no places in your wishlist.</p>
 
 {% endfor %}
