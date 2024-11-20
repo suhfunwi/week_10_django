@@ -1,0 +1,23 @@
+<h2>Places you have visited</h2>
+
+
+{% if visited%}
+<!--if statement logic with the template tag-->
+<ul>
+<!--    unordered list-->
+    {% for place in visited %}
+        <li>{{ place.name }}</li>
+<!--    list item-->
+    {% endfor %}
+
+
+</ul>
+
+{% else %}
+
+<p>You have not visited anywhere yet</p>
+
+{% endif%}
+
+<a href="{% url 'place_list' %}"> Your wishlist</a>
+<!--links back to your wishlist-->

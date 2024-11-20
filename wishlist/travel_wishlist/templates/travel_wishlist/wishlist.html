@@ -1,10 +1,26 @@
 <h2>Travel Wishlist</h2>
+
+<form method="POST" action="{% url 'place_list' %}">
+<!--  url reversing  -->
+<!--  creates the html for the form, POST means adding things to it  -->
+    {% csrf_token %}
+<!--cross site request forgery-->
+    {{new_place_form}}
+    <button type="submit"> Add new place</button>
+</form>
 {% for place in places %}
 <!--prints out the places in the wishlist on separate lines-->
 <!--django template tag-->
 <div>
     {{ place.name }}
 <!--  names of the places  -->
+
+    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+<!--connects the place_was_visited url and the current place's place_pk-->
+<!--another example of url reversing-->
+        {% csrf_token %}
+        <button>Visited!</button>
+    </form>
 </div>
 
 {% empty %}
@@ -12,3 +28,6 @@
 <p>You have no places in your wishlist.</p>
 
 {% endfor %}
+
+<a href="{% url 'places_visited' %}">Places you've visited</a>
+<!--anchor tag makes that sentence a link-->
