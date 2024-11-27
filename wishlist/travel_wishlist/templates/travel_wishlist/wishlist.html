@@ -1,25 +1,30 @@
+{% extends 'travel_wishlist/base.html'%}
+<!--tells this module to look for the base module and
+include the text from the base module-->
+{% block content %}
+
 <h2>Travel Wishlist</h2>
 
-<form method="POST" action="{% url 'place_list' %}">
+<form class="visited-form" method="POST" action="{% url 'place_list' %}">
 <!--  url reversing  -->
 <!--  creates the html for the form, POST means adding things to it  -->
     {% csrf_token %}
 <!--cross site request forgery-->
     {{new_place_form}}
-    <button type="submit"> Add new place</button>
+    <button id="add-new-place" type="submit"> Add new place</button>
 </form>
 {% for place in places %}
 <!--prints out the places in the wishlist on separate lines-->
 <!--django template tag-->
-<div>
-    {{ place.name }}
+<div class="wishlist-place">
+    <span id="place-name-{{ place.pk }}" class="place.name">{{ place.name }}</span>
 <!--  names of the places  -->
 
     <form method="POST" action="{% url 'place_was_visited' place.pk %}">
 <!--connects the place_was_visited url and the current place's place_pk-->
 <!--another example of url reversing-->
         {% csrf_token %}
-        <button>Visited!</button>
+        <button id="visited-button-{{ place.pk }}" type="submit">Visited!</button>
     </form>
 </div>
 
@@ -29,5 +34,6 @@
 
 {% endfor %}
 
-<a href="{% url 'places_visited' %}">Places you've visited</a>
+{% endblock %}
+<!--everything between the block and endblock tag is put in base.html in the same tags-->
 <!--anchor tag makes that sentence a link-->
