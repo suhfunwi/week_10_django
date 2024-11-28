@@ -17,10 +17,13 @@ include the text from the base module-->
 <!--prints out the places in the wishlist on separate lines-->
 <!--django template tag-->
 <div class="wishlist-place">
-    <span id="place-name-{{ place.pk }}" class="place.name">{{ place.name }}</span>
+    <span id="place-name-{{ place.pk }}" class="place.name">
+        <a href="{% url 'place_details' place.pk %}"> {{ place.name }} </a>
+<!--        django will create a url and link it to the place name with an anchor tag-->
+    </span>
 <!--  names of the places  -->
 
-    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+    <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
 <!--connects the place_was_visited url and the current place's place_pk-->
 <!--another example of url reversing-->
         {% csrf_token %}
